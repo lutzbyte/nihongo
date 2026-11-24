@@ -1,0 +1,73 @@
+name: Build Curriculum Dataset
+
+on:
+  workflow_dispatch:
+    inputs:
+      dataset_version:
+        description: "Nomor versi dataset (naikkan setiap data berubah)"
+        required: true
+        default: "1"
+      source_ref:
+        description: "Branch, tag, atau commit OpenJLPT"
+        required: false
+        default: "main"
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  build-dataset:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      DATASET_VERSION: ${{ inputs.dataset_version }}
+      SOURCE_REF: ${{ inputs.source_ref }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Clone OpenJLPT
+        run: |
+          git clone https://github.com/evanclan/OpenJLPT.git /tmp/openjlpt
+          git -C /tmp/openjlpt checkout "$SOURCE_REF"
+          echo "SOURCE_COMMIT=$(git -C /tmp/openjlpt rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - name: Build curriculum
+        run: |
+          python3 scripts/dataset/build_curriculum.py \
+            --source /tmp/openjlpt \
+            --out app/src/main/assets/curriculum \
+            --translations dataset/translations \
+            --audit dataset/AUDIT.md \
+            --todo-dir build/to_translate \
+            --dataset-version "$DATASET_VERSION" \
+            --source-commit "$SOURCE_COMMIT"
+
+      - name: Upload audit and translation lists
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dataset-audit
+          path: |
+            dataset/AUDIT.md
+            build/to_translate
+          if-no-files-found: ignore
+          retention-days: 30
+
+      - name: Commit dataset
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/src/main/assets/curriculum dataset/AUDIT.md
+          if git diff --cached --quiet; then
+            echo "Tidak ada perubahan dataset."
+          else
+            git commit -m "chore(dataset): build curriculum v${DATASET_VERSION} from OpenJLPT ${SOURCE_COMMIT:0:7}"
+            git push origin HEAD:main
+          fi
+
+      - name: Trigger debug build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run android-debug.yml --ref main

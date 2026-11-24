@@ -1,10 +1,10 @@
 package com.nihongo.app.di
 
 import android.content.Context
-import com.nihongo.app.BuildConfig
-import com.nihongo.app.data.content.EmptyLearningRepository
 import com.nihongo.app.data.content.LearningRepository
-import com.nihongo.app.data.content.SampleLearningRepository
+import com.nihongo.app.data.content.RoomLearningRepository
+import com.nihongo.app.data.db.NihongoDatabase
+import com.nihongo.app.data.importer.CurriculumImporter
 import com.nihongo.app.data.preferences.UserPreferencesRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,6 +18,13 @@ class AppContainer(val context: Context) {
     val preferencesRepository: UserPreferencesRepository =
         UserPreferencesRepository(context)
 
-    val learningRepository: LearningRepository =
-        if (BuildConfig.DEBUG) SampleLearningRepository(context) else EmptyLearningRepository()
+    val database: NihongoDatabase by lazy { NihongoDatabase.create(context) }
+
+    val curriculumImporter: CurriculumImporter by lazy {
+        CurriculumImporter(context, database)
+    }
+
+    val learningRepository: LearningRepository by lazy {
+        RoomLearningRepository(database.curriculumDao())
+    }
 }

@@ -19,6 +19,9 @@
     <string name="error_message">Data tidak dapat dimuat.</string>
 
     <string name="splash_tagline">Belajar Bahasa Jepang\ndengan lebih mudah</string>
+    <string name="splash_importing">Menyiapkan materi…</string>
+    <string name="splash_error_title">Materi belum siap</string>
+    <string name="splash_continue">Lanjutkan tanpa materi</string>
 
     <string name="home_greeting_title">Selamat belajar!</string>
     <string name="home_greeting_body">Semoga hari ini lebih baik ✨</string>
@@ -106,5 +109,5 @@
     <string name="coming_soon_title">Segera hadir</string>
     <string name="coming_soon_phase">Fitur ini dikerjakan pada Phase %1$d.</string>
     <string name="language_only_id">Saat ini aplikasi hanya tersedia dalam Bahasa Indonesia.</string>
-    <string name="about_body">Nihongo — belajar bahasa Jepang dengan terjemahan Indonesia.\n\nSumber materi utama: OpenJLPT. Informasi lisensi lengkap ditambahkan setelah audit dataset (Phase 3).</string>
+    <string name="about_body">Nihongo — belajar bahasa Jepang dengan terjemahan Indonesia.\n\nSumber data: OpenJLPT (CC BY-SA 4.0), yang dibangun dari daftar Jonathan Waller (CC BY), JMdict dan KANJIDIC2 (EDRDG), serta kalimat contoh Tatoeba (CC BY 2.0 FR). Terjemahan Indonesia yang ditambahkan di aplikasi ini dibagikan dengan lisensi yang sama.\n\nArti bahasa Indonesia ditampilkan jika tersedia. Jika belum, aplikasi menampilkan arti bahasa Inggris dari sumber. Terjemahan berstatus draft belum diverifikasi.</string>
 </resources>

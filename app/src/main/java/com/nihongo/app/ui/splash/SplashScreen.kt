@@ -1,7 +1,6 @@
 package com.nihongo.app.ui.splash
 
-import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -19,7 +18,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,8 +25,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nihongo.app.R
+import com.nihongo.app.ui.common.AppViewModelProvider
+import com.nihongo.app.ui.components.PrimaryButton
 import com.nihongo.app.ui.components.ProgressBar
+import com.nihongo.app.ui.components.SecondaryButton
 import com.nihongo.app.ui.illustration.SplashIllustration
 import com.nihongo.app.ui.theme.NihongoTextStyles
 import com.nihongo.app.ui.theme.Spacing
@@ -37,14 +40,26 @@ import com.nihongo.app.ui.theme.Spacing
 fun SplashScreen(
     onFinished: () -> Unit,
     modifier: Modifier = Modifier,
+    viewModel: SplashViewModel = viewModel(factory = AppViewModelProvider.Factory),
 ) {
-    val progress = remember { Animatable(0f) }
+    val state by viewModel.state.collectAsStateWithLifecycle()
     val currentOnFinished by rememberUpdatedState(onFinished)
+    val isReady = state is SplashUiState.Ready
 
-    LaunchedEffect(Unit) {
-        progress.animateTo(1f, animationSpec = tween(durationMillis = 1400, easing = LinearEasing))
-        currentOnFinished()
+    LaunchedEffect(isReady) {
+        if (isReady) currentOnFinished()
     }
+
+    val targetProgress = when (val s = state) {
+        is SplashUiState.Loading -> s.progress
+        SplashUiState.Ready -> 1f
+        is SplashUiState.Error -> 0f
+    }
+    val progress by animateFloatAsState(
+        targetValue = targetProgress,
+        animationSpec = tween(durationMillis = 300),
+        label = "splash-progress",
+    )
 
     Column(
         modifier = modifier
@@ -94,11 +109,47 @@ fun SplashScreen(
                 textAlign = TextAlign.Center,
             )
             Spacer(Modifier.weight(1f))
-            ProgressBar(
-                fraction = progress.value,
-                modifier = Modifier.fillMaxWidth(0.7f),
-                height = 6.dp,
-            )
+
+            when (val s = state) {
+                is SplashUiState.Error -> {
+                    Text(
+                        text = stringResource(R.string.splash_error_title),
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.error,
+                    )
+                    Text(
+                        text = s.message,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = TextAlign.Center,
+                        maxLines = 4,
+                    )
+                    Spacer(Modifier.height(Spacing.md))
+                    PrimaryButton(
+                        text = stringResource(R.string.action_retry),
+                        onClick = viewModel::retry,
+                    )
+                    Spacer(Modifier.height(Spacing.sm))
+                    SecondaryButton(
+                        text = stringResource(R.string.splash_continue),
+                        onClick = viewModel::continueAnyway,
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                }
+                else -> {
+                    Text(
+                        text = stringResource(R.string.splash_importing),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                    Spacer(Modifier.height(Spacing.sm))
+                    ProgressBar(
+                        fraction = progress,
+                        modifier = Modifier.fillMaxWidth(0.7f),
+                        height = 6.dp,
+                    )
+                }
+            }
         }
     }
 }

@@ -11,10 +11,12 @@ import com.nihongo.app.ui.kanji.KanjiViewModel
 import com.nihongo.app.ui.practice.QuizViewModel
 import com.nihongo.app.ui.progress.ProgressViewModel
 import com.nihongo.app.ui.settings.SettingsViewModel
+import com.nihongo.app.ui.splash.SplashViewModel
 import com.nihongo.app.ui.vocabulary.VocabularyViewModel
 
 object AppViewModelProvider {
     val Factory: ViewModelProvider.Factory = viewModelFactory {
+        initializer { SplashViewModel(nihongoContainer()) }
         initializer { HomeViewModel(nihongoContainer()) }
         initializer { VocabularyViewModel(nihongoContainer()) }
         initializer { KanjiViewModel(nihongoContainer()) }

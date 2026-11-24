@@ -133,11 +133,13 @@ private fun KanjiDetailContent(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onBackground,
             )
-            Text(
-                text = "(${kanji.readingRomaji})",
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
+            if (kanji.readingRomaji.isNotBlank()) {
+                Text(
+                    text = "(${kanji.readingRomaji})",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
 
             Text(
                 text = stringResource(R.string.jlpt_badge, kanji.level.name),
@@ -206,17 +208,21 @@ private fun KanjiDetailContent(
                             style = MaterialTheme.typography.titleLarge,
                             color = MaterialTheme.colorScheme.onSurface,
                         )
-                        Text(
-                            text = "(${example.romaji})",
-                            style = MaterialTheme.typography.bodySmall,
-                            fontStyle = FontStyle.Italic,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
-                        Text(
-                            text = example.meaning,
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurface,
-                        )
+                        if (example.romaji.isNotBlank()) {
+                            Text(
+                                text = "(${example.romaji})",
+                                style = MaterialTheme.typography.bodySmall,
+                                fontStyle = FontStyle.Italic,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            )
+                        }
+                        if (example.meaning.isNotBlank()) {
+                            Text(
+                                text = example.meaning,
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurface,
+                            )
+                        }
                     }
                 }
             }

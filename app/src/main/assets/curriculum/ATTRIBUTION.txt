@@ -1,0 +1,16 @@
+Nihongo curriculum data
+
+Dataset ini adalah adaptasi dari OpenJLPT (https://github.com/evanclan/OpenJLPT),
+lisensi CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
+
+Sumber hulu OpenJLPT:
+- Daftar level kosakata dan kanji: Jonathan Waller (https://www.tanos.co.uk/jlpt/), CC BY.
+- JMdict dan KANJIDIC2: Electronic Dictionary Research and Development Group (EDRDG).
+- Kalimat contoh: Tatoeba (https://tatoeba.org), CC BY 2.0 FR.
+
+Perubahan oleh Nihongo: struktur data dinormalisasi; sebagian bidang dihilangkan;
+terjemahan bahasa Indonesia ditambahkan oleh proyek ini (status: draft, reviewed,
+atau verified; entri tanpa terjemahan berstatus none).
+Adaptasi ini dibagikan dengan lisensi yang sama, CC BY-SA 4.0.
+
+Catatan: samakan kalimat atribusi dengan NOTICE.md di repo OpenJLPT sebelum rilis.
