@@ -1,0 +1,1 @@
+# Aturan R8/ProGuard ditambahkan pada Phase 10 (release).

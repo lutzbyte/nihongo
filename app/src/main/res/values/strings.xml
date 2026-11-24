@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nihongo</string>
+    <string name="nav_home">Beranda</string>
+    <string name="nav_practice">Latihan</string>
+    <string name="nav_progress">Progress</string>
+    <string name="nav_settings">Pengaturan</string>
+    <string name="placeholder_body">Tampilan halaman ini dibuat pada Phase 2.</string>
+</resources>
