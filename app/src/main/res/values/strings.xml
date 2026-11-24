@@ -5,5 +5,106 @@
     <string name="nav_practice">Latihan</string>
     <string name="nav_progress">Progress</string>
     <string name="nav_settings">Pengaturan</string>
-    <string name="placeholder_body">Tampilan halaman ini dibuat pada Phase 2.</string>
+
+    <string name="action_back">Kembali</string>
+    <string name="action_search">Cari</string>
+    <string name="action_close">Tutup</string>
+    <string name="action_clear">Hapus teks</string>
+    <string name="action_retry">Coba lagi</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Batal</string>
+    <string name="sample_notice">Data contoh (mode debug)</string>
+    <string name="loading">Memuat…</string>
+    <string name="error_title">Terjadi kesalahan</string>
+    <string name="error_message">Data tidak dapat dimuat.</string>
+
+    <string name="splash_tagline">Belajar Bahasa Jepang\ndengan lebih mudah</string>
+
+    <string name="home_greeting_title">Selamat belajar!</string>
+    <string name="home_greeting_body">Semoga hari ini lebih baik ✨</string>
+    <string name="home_daily_target">Target Harian</string>
+    <string name="home_target_goal">/ %1$d menit</string>
+    <string name="home_start_learning">Mulai Belajar</string>
+    <string name="category_vocabulary">Kosakata</string>
+    <string name="category_kanji">Kanji</string>
+    <string name="category_grammar">Tata Bahasa</string>
+    <string name="category_listening">Listening</string>
+    <string name="category_reading">Reading</string>
+    <string name="category_conversation">Conversation</string>
+    <string name="category_level_range">N5 – N1</string>
+
+    <string name="vocab_search_hint">Cari kosakata</string>
+    <string name="bookmark_add">Simpan ke bookmark</string>
+    <string name="bookmark_remove">Hapus dari bookmark</string>
+    <string name="pagination_range">%1$d–%2$d dari %3$d</string>
+    <string name="page_previous">Halaman sebelumnya</string>
+    <string name="page_next">Halaman berikutnya</string>
+    <string name="empty_vocab_title">Belum ada kosakata</string>
+    <string name="empty_vocab_message">Materi untuk level ini belum tersedia. Materi muncul setelah dataset diimpor.</string>
+    <string name="empty_search_title">Tidak ditemukan</string>
+    <string name="empty_search_message">Coba kata kunci lain.</string>
+
+    <string name="empty_kanji_title">Belum ada Kanji</string>
+    <string name="empty_kanji_message">Materi untuk level ini belum tersedia. Materi muncul setelah dataset diimpor.</string>
+    <string name="kanji_detail_missing">Kanji tidak ditemukan</string>
+    <string name="kanji_meaning">Arti</string>
+    <string name="kanji_onyomi">Onyomi</string>
+    <string name="kanji_kunyomi">Kunyomi</string>
+    <string name="kanji_strokes">Jumlah Goresan</string>
+    <string name="kanji_example">Contoh Penggunaan</string>
+    <string name="kanji_continue_practice">Lanjutkan Latihan</string>
+    <string name="jlpt_badge">JLPT %1$s</string>
+    <string name="kanji_on_kun">On: %1$s · Kun: %2$s</string>
+
+    <string name="practice_quiz_title">Kuis Pilihan Ganda</string>
+    <string name="practice_quiz_desc">Uji pemahamanmu dengan soal arti kata.</string>
+    <string name="practice_choose_level">Pilih level</string>
+    <string name="practice_start">Mulai Kuis</string>
+    <string name="quiz_prompt">Arti dari kata berikut adalah?</string>
+    <string name="quiz_counter">%1$d / %2$d</string>
+    <string name="quiz_next">Selanjutnya</string>
+    <string name="quiz_finish">Selesai</string>
+    <string name="quiz_result_title">Kuis selesai</string>
+    <string name="quiz_result_score">Skor: %1$d dari %2$d</string>
+    <string name="quiz_result_time">Waktu: %1$s</string>
+    <string name="empty_quiz_title">Belum ada soal</string>
+    <string name="empty_quiz_message">Soal untuk level ini belum tersedia.</string>
+
+    <string name="progress_title">Progress Belajar</string>
+    <string name="progress_range_7">7 Hari</string>
+    <string name="progress_range_30">30 Hari</string>
+    <string name="progress_activity">Aktivitas Belajar</string>
+    <string name="progress_minutes_unit">menit</string>
+    <string name="progress_no_activity">Belum ada aktivitas belajar pada periode ini.</string>
+    <string name="stat_vocabulary">Kosakata</string>
+    <string name="stat_kanji">Kanji</string>
+    <string name="stat_grammar">Grammar</string>
+    <string name="stat_streak">Streak</string>
+    <string name="stat_streak_value">%1$d Hari</string>
+    <string name="stat_target">Target Harian</string>
+    <string name="stat_target_value">%1$d Menit</string>
+
+    <string name="settings_title">Pengaturan</string>
+    <string name="setting_account">Akun</string>
+    <string name="setting_account_sub">Masuk sebagai Tamu</string>
+    <string name="setting_language">Bahasa Aplikasi</string>
+    <string name="setting_language_sub">Indonesia</string>
+    <string name="setting_theme">Tema</string>
+    <string name="theme_system">Ikuti sistem</string>
+    <string name="theme_light">Terang</string>
+    <string name="theme_dark">Gelap</string>
+    <string name="setting_text_size">Ukuran Teks</string>
+    <string name="text_small">Kecil</string>
+    <string name="text_normal">Normal</string>
+    <string name="text_large">Besar</string>
+    <string name="setting_notifications">Notifikasi</string>
+    <string name="setting_notifications_sub">Pengingat belajar harian</string>
+    <string name="setting_backup">Backup &amp; Sinkronisasi</string>
+    <string name="setting_backup_sub">Dengan Firebase</string>
+    <string name="setting_about">Tentang Aplikasi</string>
+    <string name="setting_about_sub">Nihongo v%1$s</string>
+    <string name="coming_soon_title">Segera hadir</string>
+    <string name="coming_soon_phase">Fitur ini dikerjakan pada Phase %1$d.</string>
+    <string name="language_only_id">Saat ini aplikasi hanya tersedia dalam Bahasa Indonesia.</string>
+    <string name="about_body">Nihongo — belajar bahasa Jepang dengan terjemahan Indonesia.\n\nSumber materi utama: OpenJLPT. Informasi lisensi lengkap ditambahkan setelah audit dataset (Phase 3).</string>
 </resources>

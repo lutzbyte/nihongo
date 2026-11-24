@@ -2,9 +2,9 @@ package com.nihongo.app.navigation
 
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.BarChart
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Psychology
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavController
@@ -14,6 +14,9 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import com.nihongo.app.R
 import kotlinx.serialization.Serializable
+
+@Serializable
+data object SplashRoute
 
 @Serializable
 data object HomeRoute
@@ -27,6 +30,21 @@ data object ProgressRoute
 @Serializable
 data object SettingsRoute
 
+@Serializable
+data object VocabularyRoute
+
+@Serializable
+data object KanjiListRoute
+
+@Serializable
+data class KanjiDetailRoute(val id: String)
+
+@Serializable
+data class QuizRoute(val level: String)
+
+@Serializable
+data class ComingSoonRoute(val feature: String, val phase: Int)
+
 data class TopLevelDestination(
     val route: Any,
     @StringRes val labelRes: Int,
@@ -35,8 +53,8 @@ data class TopLevelDestination(
 
 val TopLevelDestinations: List<TopLevelDestination> = listOf(
     TopLevelDestination(HomeRoute, R.string.nav_home, Icons.Filled.Home),
-    TopLevelDestination(PracticeRoute, R.string.nav_practice, Icons.Filled.Edit),
-    TopLevelDestination(ProgressRoute, R.string.nav_progress, Icons.Filled.DateRange),
+    TopLevelDestination(PracticeRoute, R.string.nav_practice, Icons.Filled.Psychology),
+    TopLevelDestination(ProgressRoute, R.string.nav_progress, Icons.Filled.BarChart),
     TopLevelDestination(SettingsRoute, R.string.nav_settings, Icons.Filled.Settings),
 )
 
@@ -52,4 +70,12 @@ fun NavController.navigateToTopLevel(destination: TopLevelDestination) {
         launchSingleTop = true
         restoreState = true
     }
+}
+
+fun NavController.navigateToHomeTab() = navigateToTopLevel(TopLevelDestinations.first())
+
+/** Phase tempat fitur dikerjakan, untuk halaman "Segera hadir". */
+fun featurePhase(feature: String): Int = when (feature) {
+    "grammar" -> 4
+    else -> 7
 }

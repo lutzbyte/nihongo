@@ -1,0 +1,53 @@
+{
+  "vocabulary": [
+    {"id": "sample-v-001", "level": "N5", "word": "あいさつ", "reading": "あいさつ", "meaning": "salam"},
+    {"id": "sample-v-002", "level": "N5", "word": "あかるい", "reading": "あかるい", "meaning": "terang"},
+    {"id": "sample-v-003", "level": "N5", "word": "あさ", "reading": "あさ", "meaning": "pagi"},
+    {"id": "sample-v-004", "level": "N5", "word": "あさごはん", "reading": "あさごはん", "meaning": "makan pagi"},
+    {"id": "sample-v-005", "level": "N5", "word": "あさって", "reading": "あさって", "meaning": "lusa"},
+    {"id": "sample-v-006", "level": "N5", "word": "あたり", "reading": "あたり", "meaning": "sekitar"}
+  ],
+  "kanji": [
+    {
+      "id": "sample-k-001", "level": "N5", "character": "日",
+      "readingKana": "ひ / にち", "readingRomaji": "hi / nichi",
+      "onyomi": "ニチ (nichi)", "kunyomi": "ひ (hi)", "strokes": 4, "meaning": "hari, matahari",
+      "example": {"japanese": "今日はいい天気です。", "romaji": "Kyou wa ii tenki desu.", "meaning": "Hari ini cuacanya bagus."}
+    },
+    {
+      "id": "sample-k-002", "level": "N5", "character": "月",
+      "readingKana": "つき / げつ", "readingRomaji": "tsuki / getsu",
+      "onyomi": "ゲツ (getsu)", "kunyomi": "つき (tsuki)", "strokes": 4, "meaning": "bulan",
+      "example": {"japanese": "来月は忙しいです。", "romaji": "Raigetsu wa isogashii desu.", "meaning": "Bulan depan sibuk."}
+    },
+    {
+      "id": "sample-k-003", "level": "N5", "character": "水",
+      "readingKana": "みず / すい", "readingRomaji": "mizu / sui",
+      "onyomi": "スイ (sui)", "kunyomi": "みず (mizu)", "strokes": 4, "meaning": "air",
+      "example": {"japanese": "水を飲みます。", "romaji": "Mizu o nomimasu.", "meaning": "Minum air."}
+    }
+  ],
+  "quiz": [
+    {"id": "sample-q-001", "level": "N5", "word": "学校", "reading": "がっこう", "options": ["Rumah", "Sekolah", "Toko", "Restoran"], "answerIndex": 1},
+    {"id": "sample-q-002", "level": "N5", "word": "水", "reading": "みず", "options": ["Api", "Air", "Angin", "Tanah"], "answerIndex": 1},
+    {"id": "sample-q-003", "level": "N5", "word": "朝", "reading": "あさ", "options": ["Malam", "Siang", "Pagi", "Sore"], "answerIndex": 2}
+  ],
+  "progress": {
+    "totalMinutes": 120,
+    "changePercent": 20,
+    "dailyMinutes": [
+      {"label": "Sen", "minutes": 8},
+      {"label": "Sel", "minutes": 14},
+      {"label": "Rab", "minutes": 18},
+      {"label": "Kam", "minutes": 28},
+      {"label": "Jum", "minutes": 26},
+      {"label": "Sab", "minutes": 12},
+      {"label": "Min", "minutes": 14}
+    ],
+    "vocabularyLearned": 842,
+    "kanjiMastered": 186,
+    "grammarProgress": 96,
+    "streakDays": 12,
+    "todayMinutes": 0
+  }
+}
