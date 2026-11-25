@@ -13,13 +13,19 @@ from pathlib import Path
 
 LEVELS = ["N5", "N4", "N3", "N2", "N1"]
 STATUSES = {"draft", "reviewed", "verified"}
+DEFAULT_STATUS = "draft"
 MANIFEST_SCHEMA_VERSION = 1
 
 problems = []
+warnings = []
 
 
 def problem(message):
     problems.append(message)
+
+
+def warn(message):
+    warnings.append(message)
 
 
 def clean(value):
@@ -155,20 +161,35 @@ TYPES = [
 ]
 
 
-def load_overlay(path):
-    if not path.exists():
-        return {}
-    data = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(data, dict):
-        problem(f"{path}: overlay terjemahan harus berupa objek JSON")
-        return {}
-    return data
+def load_overlay(trans_dir, mtype):
+    """Gabungkan semua file '<tipe>*.json' di folder terjemahan.
+
+    Nilai boleh berupa teks (otomatis berstatus draft) atau objek
+    {"meaningId": "...", "status": "draft|reviewed|verified"}.
+    """
+    merged = {}
+    for path in sorted(trans_dir.glob(f"{mtype}*.json")):
+        data = json.loads(path.read_text(encoding="utf-8"))
+        if not isinstance(data, dict):
+            problem(f"{path}: overlay terjemahan harus berupa objek JSON")
+            continue
+        for key, value in data.items():
+            if key in merged:
+                problem(f"{path.name}: ID '{key}' muncul lebih dari sekali di file overlay")
+            merged[key] = value
+    return merged
+
+
+def parse_translation(entry):
+    if isinstance(entry, str):
+        return clean(entry), DEFAULT_STATUS
+    if isinstance(entry, dict):
+        return clean(entry.get("meaningId")), entry.get("status", DEFAULT_STATUS)
+    return "", None
 
 
 def apply_translation(item, overlay):
-    entry = overlay.get(item["id"])
-    meaning_id = clean(entry.get("meaningId")) if isinstance(entry, dict) else ""
-    status = entry.get("status") if isinstance(entry, dict) else None
+    meaning_id, status = parse_translation(overlay.get(item["id"]))
     if meaning_id and status in STATUSES:
         item["meaningId"] = meaning_id
         item["translationStatus"] = status
@@ -204,6 +225,7 @@ def main():
 
     src = Path(args.source)
     out = Path(args.out)
+    trans_dir = Path(args.translations)
     meta_path = src / "data" / "json" / "meta.json"
     if not meta_path.exists():
         raise SystemExit(f"meta.json tidak ditemukan: {meta_path}")
@@ -224,10 +246,11 @@ def main():
     totals = {}
     rows = []  # untuk laporan audit
     coverage = {}
+    coverage_by_level = {}
     extra = {"vocab_with_examples": 0}
 
     for mtype, folder, meta_key, normalizer in TYPES:
-        overlay = load_overlay(Path(args.translations) / f"{mtype}.json")
+        overlay = load_overlay(trans_dir, mtype)
         seen = {}
         translated = 0
         total = 0
@@ -237,6 +260,7 @@ def main():
                 problem(f"File sumber tidak ada: {src_file}")
                 continue
             items = []
+            level_translated = 0
             for raw in load_items(src_file):
                 if not isinstance(raw, dict):
                     problem(f"{mtype} {level}: entri bukan objek")
@@ -251,6 +275,7 @@ def main():
                 apply_translation(item, overlay)
                 if item["translationStatus"] != "none":
                     translated += 1
+                    level_translated += 1
                 if mtype == "vocabulary" and item["examples"]:
                     extra["vocab_with_examples"] += 1
                 items.append(item)
@@ -267,13 +292,17 @@ def main():
                 "sha256": hashlib.sha256(data).hexdigest(),
             })
             rows.append((mtype, level, len(items), expected, len(data)))
+            coverage_by_level[(mtype, level)] = (level_translated, len(items))
             total += len(items)
             if todo_dir:
                 pending = [todo_line(mtype, i) for i in items if i["translationStatus"] == "none"]
                 (todo_dir / f"{mtype}-{level.lower()}.tsv").write_text("\n".join(pending) + "\n", encoding="utf-8")
         orphans = [key for key in overlay if key not in seen]
         if orphans:
-            problem(f"{mtype}: {len(orphans)} ID di overlay terjemahan tidak ada di dataset (contoh: {orphans[:3]})")
+            warn(f"{mtype}: {len(orphans)} ID di overlay terjemahan tidak ada di dataset: {orphans[:30]}")
+        invalid = [key for key, value in overlay.items() if key in seen and parse_translation(value)[1] not in STATUSES]
+        if invalid:
+            warn(f"{mtype}: {len(invalid)} entri overlay punya status tidak valid dan diabaikan: {invalid[:30]}")
         totals[mtype] = total
         coverage[mtype] = (translated, total)
 
@@ -294,6 +323,11 @@ def main():
     for mtype, (done, total) in coverage.items():
         percent = (100.0 * done / total) if total else 0.0
         audit.append(f"- {mtype}: {done} dari {total} ({percent:.1f}%)")
+    audit += ["", "| Tipe | Level | Diterjemahkan | Total |", "|---|---|---|---|"]
+    for (mtype, level), (done, total) in coverage_by_level.items():
+        audit.append(f"| {mtype} | {level} | {done} | {total} |")
+    audit += ["", "## Peringatan", ""]
+    audit += [f"- {w}" for w in warnings] if warnings else ["- Tidak ada."]
     audit += ["", "## Masalah", ""]
     audit += [f"- {p}" for p in problems] if problems else ["- Tidak ada."]
     audit.append("")
