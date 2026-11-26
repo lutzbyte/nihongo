@@ -1,6 +1,6 @@
 # Audit Dataset Kurikulum
 
-- Versi dataset: 2
+- Versi dataset: 3
 - Sumber: OpenJLPT 0.3.0 (commit `0d1d3410bec9`)
 - Lisensi sumber: CC-BY-SA-4.0
 
@@ -59,5 +59,14 @@
 - Tidak ada.
 
 ## Masalah
+
+- Tidak ada.
+
+## Foundation
+
+- Kana: 208 (hiragana dan katakana, 104 masing-masing diharapkan)
+- Pelajaran: 6
+
+### Masalah Foundation
 
 - Tidak ada.
