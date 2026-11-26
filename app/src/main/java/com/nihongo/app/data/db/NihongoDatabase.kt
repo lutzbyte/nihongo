@@ -10,9 +10,11 @@ import androidx.room.RoomDatabase
         VocabularyEntity::class,
         KanjiEntity::class,
         GrammarEntity::class,
+        KanaEntity::class,
+        LessonEntity::class,
         DatasetStateEntity::class,
     ],
-    version = 1,
+    version = 2,
     exportSchema = false,
 )
 abstract class NihongoDatabase : RoomDatabase() {
@@ -22,11 +24,17 @@ abstract class NihongoDatabase : RoomDatabase() {
     companion object {
         private const val DATABASE_NAME = "nihongo.db"
 
+        /**
+         * SEMENTARA: database hanya berisi materi yang bisa diimpor ulang, jadi tabel dibuang
+         * saat skema naik. WAJIB diganti dengan Migration nyata sebelum ada tabel data pengguna.
+         */
         fun create(context: Context): NihongoDatabase =
             Room.databaseBuilder(
                 context.applicationContext,
                 NihongoDatabase::class.java,
                 DATABASE_NAME,
-            ).build()
+            )
+                .fallbackToDestructiveMigration(true)
+                .build()
     }
 }

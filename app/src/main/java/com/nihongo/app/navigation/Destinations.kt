@@ -34,10 +34,31 @@ data object SettingsRoute
 data object VocabularyRoute
 
 @Serializable
+data class VocabularyDetailRoute(val id: String)
+
+@Serializable
 data object KanjiListRoute
 
 @Serializable
 data class KanjiDetailRoute(val id: String)
+
+@Serializable
+data object GrammarListRoute
+
+@Serializable
+data class GrammarDetailRoute(val id: String)
+
+@Serializable
+data object FoundationRoute
+
+@Serializable
+data class KanaRoute(val script: String)
+
+@Serializable
+data class LessonRoute(val id: String)
+
+@Serializable
+data object BookmarkRoute
 
 @Serializable
 data class QuizRoute(val level: String)
@@ -74,8 +95,6 @@ fun NavController.navigateToTopLevel(destination: TopLevelDestination) {
 
 fun NavController.navigateToHomeTab() = navigateToTopLevel(TopLevelDestinations.first())
 
-/** Phase tempat fitur dikerjakan, untuk halaman "Segera hadir". */
-fun featurePhase(feature: String): Int = when (feature) {
-    "grammar" -> 4
-    else -> 7
-}
+/** Phase tempat fitur dikerjakan, untuk halaman "Segera hadir" (Listening, Reading, Conversation). */
+@Suppress("UNUSED_PARAMETER")
+fun featurePhase(feature: String): Int = 7

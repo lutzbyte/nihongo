@@ -26,6 +26,8 @@ data class CountsDto(
     val vocabulary: Int,
     val kanji: Int,
     val grammar: Int,
+    val kana: Int = 0,
+    val lessons: Int = 0,
 )
 
 @Serializable
@@ -100,3 +102,45 @@ data class GrammarItemDto(
 
 @Serializable
 data class GrammarFileDto(val items: List<GrammarItemDto>)
+
+@Serializable
+data class KanaItemDto(
+    val id: String,
+    val script: String,
+    val kana: String,
+    val romaji: String,
+    val group: String,
+    val row: String = "",
+    val order: Int,
+)
+
+@Serializable
+data class KanaFileDto(val items: List<KanaItemDto>)
+
+@Serializable
+data class LessonRowDto(
+    val ja: String,
+    val reading: String? = null,
+    val romaji: String? = null,
+    val meaning: String,
+)
+
+@Serializable
+data class LessonSectionDto(
+    val heading: String,
+    val body: String = "",
+    val rows: List<LessonRowDto> = emptyList(),
+)
+
+@Serializable
+data class LessonItemDto(
+    val id: String,
+    val category: String = "foundation",
+    val order: Int,
+    val title: String,
+    val summary: String = "",
+    val sections: List<LessonSectionDto>,
+)
+
+@Serializable
+data class LessonFileDto(val items: List<LessonItemDto>)

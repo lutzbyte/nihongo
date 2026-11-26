@@ -3,7 +3,9 @@ package com.nihongo.app.data.importer
 import android.content.Context
 import com.nihongo.app.data.db.DatasetStateEntity
 import com.nihongo.app.data.db.GrammarEntity
+import com.nihongo.app.data.db.KanaEntity
 import com.nihongo.app.data.db.KanjiEntity
+import com.nihongo.app.data.db.LessonEntity
 import com.nihongo.app.data.db.NihongoDatabase
 import com.nihongo.app.data.db.VocabularyEntity
 import com.nihongo.app.domain.model.JlptLevel
@@ -25,6 +27,8 @@ sealed interface ImportResult {
         val vocabulary: Int,
         val kanji: Int,
         val grammar: Int,
+        val kana: Int,
+        val lessons: Int,
     ) : ImportResult
 
     data class Failed(val message: String, val hasExistingData: Boolean) : ImportResult
@@ -37,7 +41,11 @@ private const val SUPPORTED_MANIFEST_SCHEMA = 1
 private const val TYPE_VOCABULARY = "vocabulary"
 private const val TYPE_KANJI = "kanji"
 private const val TYPE_GRAMMAR = "grammar"
+private const val TYPE_KANA = "kana"
+private const val TYPE_LESSON = "lesson"
 private val ALLOWED_STATUSES = setOf("none", "draft", "reviewed", "verified")
+private val KANA_SCRIPTS = setOf("hiragana", "katakana")
+private val KANA_GROUPS = setOf("basic", "dakuten", "handakuten", "yoon")
 
 class CurriculumImporter(
     private val context: Context,
@@ -85,6 +93,8 @@ class CurriculumImporter(
         val vocabulary = ArrayList<VocabularyEntity>()
         val kanji = ArrayList<KanjiEntity>()
         val grammar = ArrayList<GrammarEntity>()
+        val kana = ArrayList<KanaEntity>()
+        val lessons = ArrayList<LessonEntity>()
 
         manifest.files.forEachIndexed { index, file ->
             val bytes = readAsset(file.path)
@@ -92,23 +102,35 @@ class CurriculumImporter(
             if (!checksum.equals(file.sha256, ignoreCase = true)) {
                 throw ImportException("Checksum tidak cocok untuk ${file.path}")
             }
-            val level = parseLevel(file.level, file.path)
             val text = bytes.decodeToString()
             when (file.type) {
                 TYPE_VOCABULARY -> {
+                    val level = parseLevel(file.level, file.path)
                     val items = json.decodeFromString<VocabFileDto>(text).items
                     checkCount(file, items.size)
                     items.forEach { vocabulary += it.toEntity(level, file.path) }
                 }
                 TYPE_KANJI -> {
+                    val level = parseLevel(file.level, file.path)
                     val items = json.decodeFromString<KanjiFileDto>(text).items
                     checkCount(file, items.size)
                     items.forEach { kanji += it.toEntity(level, file.path) }
                 }
                 TYPE_GRAMMAR -> {
+                    val level = parseLevel(file.level, file.path)
                     val items = json.decodeFromString<GrammarFileDto>(text).items
                     checkCount(file, items.size)
-                    items.forEach { grammar += it.toEntity(level, file.path) }
+                    items.forEachIndexed { order, item -> grammar += item.toEntity(level, file.path, order) }
+                }
+                TYPE_KANA -> {
+                    val items = json.decodeFromString<KanaFileDto>(text).items
+                    checkCount(file, items.size)
+                    items.forEach { kana += it.toEntity(file.path) }
+                }
+                TYPE_LESSON -> {
+                    val items = json.decodeFromString<LessonFileDto>(text).items
+                    checkCount(file, items.size)
+                    items.forEach { lessons += it.toEntity(file.path) }
                 }
                 else -> throw ImportException("Tipe file tidak dikenal: ${file.type} (${file.path})")
             }
@@ -118,10 +140,14 @@ class CurriculumImporter(
         ensureUnique(vocabulary.map { it.id }, "kosakata")
         ensureUnique(kanji.map { it.id }, "kanji")
         ensureUnique(grammar.map { it.id }, "grammar")
+        ensureUnique(kana.map { it.id }, "kana")
+        ensureUnique(lessons.map { it.id }, "pelajaran")
 
         if (vocabulary.size != manifest.counts.vocabulary ||
             kanji.size != manifest.counts.kanji ||
-            grammar.size != manifest.counts.grammar
+            grammar.size != manifest.counts.grammar ||
+            kana.size != manifest.counts.kana ||
+            lessons.size != manifest.counts.lessons
         ) {
             throw ImportException("Jumlah data tidak sesuai dengan manifest")
         }
@@ -130,6 +156,8 @@ class CurriculumImporter(
             vocabulary = vocabulary,
             kanji = kanji,
             grammar = grammar,
+            kana = kana,
+            lessons = lessons,
             state = DatasetStateEntity(
                 datasetVersion = manifest.datasetVersion,
                 sourceName = manifest.source.name,
@@ -141,6 +169,8 @@ class CurriculumImporter(
                 vocabularyCount = vocabulary.size,
                 kanjiCount = kanji.size,
                 grammarCount = grammar.size,
+                kanaCount = kana.size,
+                lessonCount = lessons.size,
             ),
         )
         onProgress(1f)
@@ -149,13 +179,17 @@ class CurriculumImporter(
             vocabulary = vocabulary.size,
             kanji = kanji.size,
             grammar = grammar.size,
+            kana = kana.size,
+            lessons = lessons.size,
         )
     }
 
     private suspend fun previousImportIsIntact(state: DatasetStateEntity): Boolean =
         dao.countVocabulary() == state.vocabularyCount &&
             dao.countKanji() == state.kanjiCount &&
-            dao.countGrammar() == state.grammarCount
+            dao.countGrammar() == state.grammarCount &&
+            dao.countKana() == state.kanaCount &&
+            dao.countLessons() == state.lessonCount
 
     private fun readManifest(): ManifestDto {
         val bytes = try {
@@ -268,7 +302,7 @@ private fun KanjiItemDto.toEntity(fileLevel: String, path: String): KanjiEntity 
     )
 }
 
-private fun GrammarItemDto.toEntity(fileLevel: String, path: String): GrammarEntity {
+private fun GrammarItemDto.toEntity(fileLevel: String, path: String, order: Int): GrammarEntity {
     requireText(id, "id", path, id)
     requireText(pattern, "pattern", path, id)
     requireText(meaningEn, "meaningEn", path, id)
@@ -277,6 +311,7 @@ private fun GrammarItemDto.toEntity(fileLevel: String, path: String): GrammarEnt
     return GrammarEntity(
         id = id,
         level = fileLevel,
+        sortOrder = order,
         pattern = pattern,
         reading = reading,
         romaji = romaji,
@@ -287,5 +322,36 @@ private fun GrammarItemDto.toEntity(fileLevel: String, path: String): GrammarEnt
         notes = notes,
         tags = tags.joinToString(","),
         examplesJson = encodeExamples(examples),
+    )
+}
+
+private fun KanaItemDto.toEntity(path: String): KanaEntity {
+    requireText(id, "id", path, id)
+    requireText(kana, "kana", path, id)
+    requireText(romaji, "romaji", path, id)
+    if (script !in KANA_SCRIPTS) throw ImportException("Script kana '$script' tidak valid untuk '$id' pada $path")
+    if (group !in KANA_GROUPS) throw ImportException("Grup kana '$group' tidak valid untuk '$id' pada $path")
+    return KanaEntity(
+        id = id,
+        script = script,
+        kana = kana,
+        romaji = romaji,
+        kanaGroup = group,
+        kanaRow = row,
+        sortOrder = order,
+    )
+}
+
+private fun LessonItemDto.toEntity(path: String): LessonEntity {
+    requireText(id, "id", path, id)
+    requireText(title, "title", path, id)
+    if (sections.isEmpty()) throw ImportException("Pelajaran '$id' tidak punya section pada $path")
+    return LessonEntity(
+        id = id,
+        category = category,
+        sortOrder = order,
+        title = title,
+        summary = summary,
+        sectionsJson = json.encodeToString(ListSerializer(LessonSectionDto.serializer()), sections),
     )
 }

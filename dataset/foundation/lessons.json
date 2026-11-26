@@ -1,0 +1,168 @@
+{
+"items": [
+{"id":"pronunciation","category":"foundation","order":1,"title":"Pengucapan Dasar","summary":"Lima vokal, vokal panjang, konsonan rangkap, dan bunyi ん.","sections":[
+{"heading":"Lima vokal","body":"Bahasa Jepang punya lima vokal yang mirip bahasa Indonesia: a, i, u, e, o. Setiap vokal selalu dibaca sama dan tidak berubah menurut posisinya.","rows":[
+{"ja":"あ","romaji":"a","meaning":"seperti a pada 'api'"},
+{"ja":"い","romaji":"i","meaning":"seperti i pada 'itu'"},
+{"ja":"う","romaji":"u","meaning":"mirip u pada 'ubi', tetapi bibir tidak terlalu bulat"},
+{"ja":"え","romaji":"e","meaning":"seperti é (bukan e pepet)"},
+{"ja":"お","romaji":"o","meaning":"seperti o pada 'toko'"}]},
+{"heading":"Vokal panjang","body":"Vokal panjang dibaca dua kali lebih lama dan bisa mengubah arti kata. Dalam hiragana, vokal dipanjangkan dengan menambah あ (setelah bunyi a), い (setelah i), う (setelah u), い (setelah e, kadang え), dan う (setelah o, kadang お).","rows":[
+{"ja":"おばさん","romaji":"obasan","meaning":"bibi"},
+{"ja":"おばあさん","romaji":"obaasan","meaning":"nenek"},
+{"ja":"おじさん","romaji":"ojisan","meaning":"paman"},
+{"ja":"おじいさん","romaji":"ojiisan","meaning":"kakek"},
+{"ja":"ゆき","romaji":"yuki","meaning":"salju"},
+{"ja":"ゆうき","romaji":"yuuki","meaning":"keberanian"}]},
+{"heading":"Konsonan rangkap (っ)","body":"っ kecil menandakan jeda singkat sebelum konsonan berikutnya, sehingga konsonan itu terdengar ganda. Dalam romaji ditulis dengan menggandakan konsonan.","rows":[
+{"ja":"きて","romaji":"kite","meaning":"datang (bentuk て)"},
+{"ja":"きって","romaji":"kitte","meaning":"perangko"},
+{"ja":"ざっし","romaji":"zasshi","meaning":"majalah"}]},
+{"heading":"Bunyi ん","body":"ん adalah bunyi nasal yang punya satu ketukan penuh. Bunyinya menyesuaikan huruf sesudahnya (n, m, atau ng), tetapi dalam romaji cukup ditulis n.","rows":[
+{"ja":"ほん","romaji":"hon","meaning":"buku"},
+{"ja":"さんぽ","romaji":"sanpo","meaning":"jalan-jalan santai"},
+{"ja":"えんぴつ","romaji":"enpitsu","meaning":"pensil"}]},
+{"heading":"Catatan romaji","body":"Beberapa kana berbeda dari pola barisnya: し = shi, ち = chi, つ = tsu, ふ = fu, じ = ji. Bunyi baris ら (ra, ri, ru, re, ro) berada di antara r dan l. を dibaca o dan hanya dipakai sebagai partikel. Sebagai partikel, は dibaca wa dan へ dibaca e."}]},
+
+{"id":"numbers","category":"foundation","order":2,"title":"Angka Jepang","summary":"Angka 0 sampai 10, puluhan, ratusan, ribuan, dan puluhan ribu.","sections":[
+{"heading":"Angka 0–10","body":"Angka 4, 7, dan 9 punya dua bacaan. Saat menghitung, よん, なな, dan きゅう lebih umum dipakai.","rows":[
+{"ja":"零","reading":"れい / ゼロ","romaji":"rei / zero","meaning":"nol"},
+{"ja":"一","reading":"いち","romaji":"ichi","meaning":"satu"},
+{"ja":"二","reading":"に","romaji":"ni","meaning":"dua"},
+{"ja":"三","reading":"さん","romaji":"san","meaning":"tiga"},
+{"ja":"四","reading":"し / よん","romaji":"shi / yon","meaning":"empat"},
+{"ja":"五","reading":"ご","romaji":"go","meaning":"lima"},
+{"ja":"六","reading":"ろく","romaji":"roku","meaning":"enam"},
+{"ja":"七","reading":"しち / なな","romaji":"shichi / nana","meaning":"tujuh"},
+{"ja":"八","reading":"はち","romaji":"hachi","meaning":"delapan"},
+{"ja":"九","reading":"きゅう / く","romaji":"kyuu / ku","meaning":"sembilan"},
+{"ja":"十","reading":"じゅう","romaji":"juu","meaning":"sepuluh"}]},
+{"heading":"Puluhan","body":"Puluhan dibentuk dengan menggabungkan angka: 11 = 十 + 一, 20 = 二 + 十.","rows":[
+{"ja":"十一","reading":"じゅういち","romaji":"juuichi","meaning":"sebelas"},
+{"ja":"十二","reading":"じゅうに","romaji":"juuni","meaning":"dua belas"},
+{"ja":"二十","reading":"にじゅう","romaji":"nijuu","meaning":"dua puluh"},
+{"ja":"三十","reading":"さんじゅう","romaji":"sanjuu","meaning":"tiga puluh"},
+{"ja":"九十九","reading":"きゅうじゅうきゅう","romaji":"kyuujuukyuu","meaning":"sembilan puluh sembilan"}]},
+{"heading":"Ratusan dan ribuan","body":"Bunyi berubah pada 300, 600, 800, 3000, dan 8000. Angka besar dihitung per 万 (10.000), bukan per ribu: 十万 berarti 100.000.","rows":[
+{"ja":"百","reading":"ひゃく","romaji":"hyaku","meaning":"seratus"},
+{"ja":"三百","reading":"さんびゃく","romaji":"sanbyaku","meaning":"tiga ratus"},
+{"ja":"六百","reading":"ろっぴゃく","romaji":"roppyaku","meaning":"enam ratus"},
+{"ja":"八百","reading":"はっぴゃく","romaji":"happyaku","meaning":"delapan ratus"},
+{"ja":"千","reading":"せん","romaji":"sen","meaning":"seribu"},
+{"ja":"三千","reading":"さんぜん","romaji":"sanzen","meaning":"tiga ribu"},
+{"ja":"八千","reading":"はっせん","romaji":"hassen","meaning":"delapan ribu"},
+{"ja":"一万","reading":"いちまん","romaji":"ichiman","meaning":"sepuluh ribu"}]}]},
+
+{"id":"greetings","category":"foundation","order":3,"title":"Salam dan Ungkapan Dasar","summary":"Salam harian, ungkapan di rumah dan saat makan, serta jawaban singkat.","sections":[
+{"heading":"Salam harian","rows":[
+{"ja":"おはようございます","romaji":"ohayou gozaimasu","meaning":"selamat pagi (sopan)"},
+{"ja":"こんにちは","romaji":"konnichiwa","meaning":"selamat siang; halo"},
+{"ja":"こんばんは","romaji":"konbanwa","meaning":"selamat malam (saat bertemu)"},
+{"ja":"おやすみなさい","romaji":"oyasuminasai","meaning":"selamat tidur; selamat malam (saat berpisah)"},
+{"ja":"さようなら","romaji":"sayounara","meaning":"selamat tinggal"},
+{"ja":"ありがとうございます","romaji":"arigatou gozaimasu","meaning":"terima kasih (sopan)"},
+{"ja":"どういたしまして","romaji":"douitashimashite","meaning":"sama-sama"},
+{"ja":"すみません","romaji":"sumimasen","meaning":"maaf; permisi; terima kasih atas kerepotannya"},
+{"ja":"ごめんなさい","romaji":"gomennasai","meaning":"maaf (permintaan maaf)"},
+{"ja":"はじめまして","romaji":"hajimemashite","meaning":"salam kenal (saat pertama bertemu)"},
+{"ja":"どうぞよろしくおねがいします","romaji":"douzo yoroshiku onegaishimasu","meaning":"senang berkenalan; mohon bantuan dan kerja samanya"}]},
+{"heading":"Di rumah dan saat makan","rows":[
+{"ja":"いただきます","romaji":"itadakimasu","meaning":"selamat makan (diucapkan sebelum makan)"},
+{"ja":"ごちそうさまでした","romaji":"gochisousama deshita","meaning":"terima kasih atas hidangannya (setelah makan)"},
+{"ja":"いってきます","romaji":"ittekimasu","meaning":"saya berangkat (saat meninggalkan rumah)"},
+{"ja":"いってらっしゃい","romaji":"itterasshai","meaning":"hati-hati di jalan (jawaban untuk いってきます)"},
+{"ja":"ただいま","romaji":"tadaima","meaning":"saya pulang"},
+{"ja":"おかえりなさい","romaji":"okaerinasai","meaning":"selamat datang kembali"}]},
+{"heading":"Menjawab","rows":[
+{"ja":"はい","romaji":"hai","meaning":"ya"},
+{"ja":"いいえ","romaji":"iie","meaning":"tidak"},
+{"ja":"おげんきですか","romaji":"ogenki desu ka","meaning":"apa kabar?"},
+{"ja":"げんきです","romaji":"genki desu","meaning":"saya baik-baik saja"}]}]},
+
+{"id":"sentence-structure","category":"foundation","order":4,"title":"Struktur Kalimat Sederhana","summary":"Urutan kata, です, kalimat tanya, kalimat negatif, dan bentuk sopan kata kerja.","sections":[
+{"heading":"Urutan kata","body":"Kalimat Jepang berakhir dengan kata kerja atau です. Urutan dasarnya: topik atau subjek, objek, lalu kata kerja (SOV). Bahasa Indonesia berpola SVO. Partikel dipasang setelah kata untuk menandai perannya.","rows":[
+{"ja":"わたしはりんごをたべます。","romaji":"watashi wa ringo o tabemasu","meaning":"Saya makan apel."}]},
+{"heading":"Kalimat dengan です","body":"AはBです berarti 'A adalah B'. です membuat kalimat terdengar sopan.","rows":[
+{"ja":"わたしはがくせいです。","romaji":"watashi wa gakusei desu","meaning":"Saya adalah pelajar."},
+{"ja":"これはほんです。","romaji":"kore wa hon desu","meaning":"Ini adalah buku."},
+{"ja":"たなかさんはせんせいです。","romaji":"Tanaka-san wa sensei desu","meaning":"Pak Tanaka adalah guru."}]},
+{"heading":"Kalimat tanya","body":"Tambahkan か di akhir kalimat. Tanda tanya tidak wajib.","rows":[
+{"ja":"あなたはがくせいですか。","romaji":"anata wa gakusei desu ka","meaning":"Apakah kamu pelajar?"},
+{"ja":"これはなんですか。","romaji":"kore wa nan desu ka","meaning":"Ini apa?"},
+{"ja":"だれですか。","romaji":"dare desu ka","meaning":"Siapa itu?"}]},
+{"heading":"Kalimat negatif","body":"Bentuk negatif sopan dari です adalah ではありません atau じゃありません (lebih santai).","rows":[
+{"ja":"わたしはせんせいじゃありません。","romaji":"watashi wa sensei ja arimasen","meaning":"Saya bukan guru."},
+{"ja":"これはほんではありません。","romaji":"kore wa hon dewa arimasen","meaning":"Ini bukan buku."}]},
+{"heading":"Kata kerja bentuk sopan","body":"Akhiran ます untuk bentuk positif, ません untuk negatif, ました untuk lampau, dan ませんでした untuk lampau negatif.","rows":[
+{"ja":"たべます","romaji":"tabemasu","meaning":"makan"},
+{"ja":"たべません","romaji":"tabemasen","meaning":"tidak makan"},
+{"ja":"たべました","romaji":"tabemashita","meaning":"sudah makan"},
+{"ja":"たべませんでした","romaji":"tabemasen deshita","meaning":"tidak makan (lampau)"}]}]},
+
+{"id":"particles","category":"foundation","order":5,"title":"Partikel Dasar","summary":"Partikel yang paling sering dipakai beserta contoh kalimatnya.","sections":[
+{"heading":"は (wa): penanda topik","body":"Menandai topik pembicaraan, kira-kira 'adapun ...'. Ditulis は tetapi dibaca wa.","rows":[
+{"ja":"わたしはがくせいです。","romaji":"watashi wa gakusei desu","meaning":"Saya adalah pelajar."},
+{"ja":"きょうはあついです。","romaji":"kyou wa atsui desu","meaning":"Hari ini panas."}]},
+{"heading":"が (ga): penanda subjek","body":"Menandai subjek, terutama informasi baru atau yang ditekankan. Juga dipakai dengan すき, わかる, ある, dan いる.","rows":[
+{"ja":"あめがふっています。","romaji":"ame ga futte imasu","meaning":"Hujan sedang turun."},
+{"ja":"ねこがすきです。","romaji":"neko ga suki desu","meaning":"Saya suka kucing."}]},
+{"heading":"を (o): penanda objek","body":"Menandai objek langsung kata kerja. Dibaca o.","rows":[
+{"ja":"みずをのみます。","romaji":"mizu o nomimasu","meaning":"Minum air."},
+{"ja":"てがみをかきます。","romaji":"tegami o kakimasu","meaning":"Menulis surat."}]},
+{"heading":"に (ni): waktu, tujuan, dan tempat berada","rows":[
+{"ja":"しちじにおきます。","romaji":"shichiji ni okimasu","meaning":"Bangun jam tujuh."},
+{"ja":"がっこうにいきます。","romaji":"gakkou ni ikimasu","meaning":"Pergi ke sekolah."},
+{"ja":"へやにねこがいます。","romaji":"heya ni neko ga imasu","meaning":"Ada kucing di kamar."}]},
+{"heading":"で (de): tempat tindakan dan alat","rows":[
+{"ja":"としょかんでべんきょうします。","romaji":"toshokan de benkyou shimasu","meaning":"Belajar di perpustakaan."},
+{"ja":"バスでいきます。","romaji":"basu de ikimasu","meaning":"Pergi naik bus."}]},
+{"heading":"と (to) dan も (mo)","body":"と berarti 'dan' (untuk kata benda) atau 'bersama'. も berarti 'juga'.","rows":[
+{"ja":"ともだちとあそびます。","romaji":"tomodachi to asobimasu","meaning":"Bermain bersama teman."},
+{"ja":"パンとたまごをかいます。","romaji":"pan to tamago o kaimasu","meaning":"Membeli roti dan telur."},
+{"ja":"わたしもがくせいです。","romaji":"watashi mo gakusei desu","meaning":"Saya juga pelajar."}]},
+{"heading":"の (no): kepemilikan dan penjelasan","rows":[
+{"ja":"わたしのほん","romaji":"watashi no hon","meaning":"buku saya"},
+{"ja":"にほんのくるま","romaji":"nihon no kuruma","meaning":"mobil Jepang"}]},
+{"heading":"へ (e), から (kara), まで (made)","body":"へ menunjukkan arah dan dibaca e. から berarti 'dari' dan まで berarti 'sampai'.","rows":[
+{"ja":"がっこうへいきます。","romaji":"gakkou e ikimasu","meaning":"Pergi menuju sekolah."},
+{"ja":"くじからじゅうじまでべんきょうします。","romaji":"kuji kara juuji made benkyou shimasu","meaning":"Belajar dari jam sembilan sampai jam sepuluh."}]},
+{"heading":"か, ね, よ di akhir kalimat","body":"か menandai pertanyaan, ね meminta persetujuan, dan よ memberi informasi atau penekanan.","rows":[
+{"ja":"いいですか。","romaji":"ii desu ka","meaning":"Apakah boleh?"},
+{"ja":"いいてんきですね。","romaji":"ii tenki desu ne","meaning":"Cuacanya bagus, ya."},
+{"ja":"あしたはやすみですよ。","romaji":"ashita wa yasumi desu yo","meaning":"Besok libur, lho."}]}]},
+
+{"id":"basic-vocabulary","category":"foundation","order":6,"title":"Kosakata Dasar","summary":"Hari, warna, keluarga, kata ganti, dan kata tanya.","sections":[
+{"heading":"Hari dalam seminggu","rows":[
+{"ja":"月曜日","reading":"げつようび","romaji":"getsuyoubi","meaning":"Senin"},
+{"ja":"火曜日","reading":"かようび","romaji":"kayoubi","meaning":"Selasa"},
+{"ja":"水曜日","reading":"すいようび","romaji":"suiyoubi","meaning":"Rabu"},
+{"ja":"木曜日","reading":"もくようび","romaji":"mokuyoubi","meaning":"Kamis"},
+{"ja":"金曜日","reading":"きんようび","romaji":"kinyoubi","meaning":"Jumat"},
+{"ja":"土曜日","reading":"どようび","romaji":"doyoubi","meaning":"Sabtu"},
+{"ja":"日曜日","reading":"にちようび","romaji":"nichiyoubi","meaning":"Minggu"}]},
+{"heading":"Warna","rows":[
+{"ja":"赤","reading":"あか","romaji":"aka","meaning":"merah"},
+{"ja":"青","reading":"あお","romaji":"ao","meaning":"biru"},
+{"ja":"黄色","reading":"きいろ","romaji":"kiiro","meaning":"kuning"},
+{"ja":"緑","reading":"みどり","romaji":"midori","meaning":"hijau"},
+{"ja":"白","reading":"しろ","romaji":"shiro","meaning":"putih"},
+{"ja":"黒","reading":"くろ","romaji":"kuro","meaning":"hitam"},
+{"ja":"茶色","reading":"ちゃいろ","romaji":"chairo","meaning":"cokelat"}]},
+{"heading":"Keluarga","body":"Untuk keluarga orang lain dipakai bentuk hormat seperti お父さん. Untuk keluarga sendiri biasanya dipakai 父, 母, 兄, dan 姉.","rows":[
+{"ja":"お父さん","reading":"おとうさん","romaji":"otousan","meaning":"ayah"},
+{"ja":"お母さん","reading":"おかあさん","romaji":"okaasan","meaning":"ibu"},
+{"ja":"お兄さん","reading":"おにいさん","romaji":"oniisan","meaning":"kakak laki-laki"},
+{"ja":"お姉さん","reading":"おねえさん","romaji":"oneesan","meaning":"kakak perempuan"},
+{"ja":"弟","reading":"おとうと","romaji":"otouto","meaning":"adik laki-laki"},
+{"ja":"妹","reading":"いもうと","romaji":"imouto","meaning":"adik perempuan"}]},
+{"heading":"Kata ganti dan kata tanya","body":"Kosakata lengkap tersedia di menu Kosakata (N5 sampai N1).","rows":[
+{"ja":"私","reading":"わたし","romaji":"watashi","meaning":"saya"},
+{"ja":"あなた","romaji":"anata","meaning":"kamu; Anda"},
+{"ja":"これ","romaji":"kore","meaning":"ini"},
+{"ja":"それ","romaji":"sore","meaning":"itu (dekat lawan bicara)"},
+{"ja":"あれ","romaji":"are","meaning":"itu (jauh dari keduanya)"},
+{"ja":"何","reading":"なに","romaji":"nani","meaning":"apa"},
+{"ja":"誰","reading":"だれ","romaji":"dare","meaning":"siapa"},
+{"ja":"どこ","romaji":"doko","meaning":"di mana"},
+{"ja":"いつ","romaji":"itsu","meaning":"kapan"}]}]}
+]}

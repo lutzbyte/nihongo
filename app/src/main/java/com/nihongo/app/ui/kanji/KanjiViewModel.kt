@@ -21,6 +21,7 @@ import kotlinx.coroutines.launch
 
 data class KanjiListUiState(
     val level: JlptLevel = JlptLevel.N5,
+    val query: String = "",
     val content: UiState<List<KanjiItem>> = UiState.Loading,
     val isSample: Boolean = false,
 )
@@ -37,22 +38,23 @@ class KanjiViewModel(container: AppContainer) : ViewModel() {
     private val preferencesRepository = container.preferencesRepository
 
     private val level = MutableStateFlow(JlptLevel.N5)
+    private val query = MutableStateFlow("")
     private val detailId = MutableStateFlow<String?>(null)
     private val retryCounter = MutableStateFlow(0)
 
-    val listState: StateFlow<KanjiListUiState> = combine(level, retryCounter) { l, _ -> l }
-        .flatMapLatest { l ->
+    val listState: StateFlow<KanjiListUiState> = combine(level, query, retryCounter) { l, q, _ -> l to q }
+        .flatMapLatest { (l, q) ->
             flow {
-                emit(KanjiListUiState(level = l, content = UiState.Loading, isSample = repository.isSample))
+                emit(KanjiListUiState(level = l, query = q, content = UiState.Loading, isSample = repository.isSample))
                 val result: UiState<List<KanjiItem>> = try {
-                    val items = repository.getKanjiList(l)
+                    val items = repository.getKanjiList(l, q)
                     if (items.isEmpty()) UiState.Empty else UiState.Success(items)
                 } catch (e: CancellationException) {
                     throw e
                 } catch (e: Exception) {
                     UiState.Error(e.message)
                 }
-                emit(KanjiListUiState(level = l, content = result, isSample = repository.isSample))
+                emit(KanjiListUiState(level = l, query = q, content = result, isSample = repository.isSample))
             }
         }
         .stateIn(
@@ -92,6 +94,10 @@ class KanjiViewModel(container: AppContainer) : ViewModel() {
 
     fun onLevelSelected(newLevel: JlptLevel) {
         level.value = newLevel
+    }
+
+    fun onQueryChange(newQuery: String) {
+        query.value = newQuery
     }
 
     fun loadDetail(id: String) {

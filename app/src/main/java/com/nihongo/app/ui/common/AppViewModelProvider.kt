@@ -6,12 +6,16 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.nihongo.app.NihongoApplication
 import com.nihongo.app.di.AppContainer
+import com.nihongo.app.ui.bookmark.BookmarkViewModel
+import com.nihongo.app.ui.foundation.FoundationViewModel
+import com.nihongo.app.ui.grammar.GrammarViewModel
 import com.nihongo.app.ui.home.HomeViewModel
 import com.nihongo.app.ui.kanji.KanjiViewModel
 import com.nihongo.app.ui.practice.QuizViewModel
 import com.nihongo.app.ui.progress.ProgressViewModel
 import com.nihongo.app.ui.settings.SettingsViewModel
 import com.nihongo.app.ui.splash.SplashViewModel
+import com.nihongo.app.ui.vocabulary.VocabularyDetailViewModel
 import com.nihongo.app.ui.vocabulary.VocabularyViewModel
 
 object AppViewModelProvider {
@@ -19,7 +23,11 @@ object AppViewModelProvider {
         initializer { SplashViewModel(nihongoContainer()) }
         initializer { HomeViewModel(nihongoContainer()) }
         initializer { VocabularyViewModel(nihongoContainer()) }
+        initializer { VocabularyDetailViewModel(nihongoContainer()) }
         initializer { KanjiViewModel(nihongoContainer()) }
+        initializer { GrammarViewModel(nihongoContainer()) }
+        initializer { FoundationViewModel(nihongoContainer()) }
+        initializer { BookmarkViewModel(nihongoContainer()) }
         initializer { QuizViewModel(nihongoContainer()) }
         initializer { ProgressViewModel(nihongoContainer()) }
         initializer { SettingsViewModel(nihongoContainer()) }

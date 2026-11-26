@@ -1,11 +1,7 @@
 package com.nihongo.app.domain.model
 
-import kotlinx.serialization.Serializable
-
-@Serializable
 enum class JlptLevel { N5, N4, N3, N2, N1 }
 
-@Serializable
 data class VocabularyItem(
     val id: String,
     val level: JlptLevel,
@@ -14,14 +10,30 @@ data class VocabularyItem(
     val meaning: String,
 )
 
-@Serializable
+data class VocabularyExample(
+    val japanese: String,
+    val furigana: String?,
+    val english: String?,
+)
+
+data class VocabularyDetail(
+    val id: String,
+    val level: JlptLevel,
+    val word: String,
+    val reading: String,
+    val romaji: String,
+    val meaning: String,
+    val meaningTranslated: Boolean,
+    val partsOfSpeech: List<String>,
+    val examples: List<VocabularyExample>,
+)
+
 data class KanjiExample(
     val japanese: String,
     val romaji: String,
     val meaning: String,
 )
 
-@Serializable
 data class KanjiItem(
     val id: String,
     val level: JlptLevel,
@@ -35,7 +47,25 @@ data class KanjiItem(
     val example: KanjiExample? = null,
 )
 
-@Serializable
+data class GrammarExample(
+    val japanese: String,
+    val english: String,
+)
+
+data class GrammarItem(
+    val id: String,
+    val level: JlptLevel,
+    val pattern: String,
+    val reading: String?,
+    val romaji: String?,
+    val meaning: String,
+    val meaningTranslated: Boolean,
+    val formation: String,
+    val notes: String?,
+    val tags: List<String>,
+    val examples: List<GrammarExample>,
+)
+
 data class QuizQuestion(
     val id: String,
     val level: JlptLevel,
@@ -45,13 +75,11 @@ data class QuizQuestion(
     val answerIndex: Int,
 )
 
-@Serializable
 data class DayMinutes(
     val label: String,
     val minutes: Int,
 )
 
-@Serializable
 data class ProgressSummary(
     val totalMinutes: Int = 0,
     val changePercent: Int? = null,
@@ -67,6 +95,53 @@ data class VocabularyPage(
     val items: List<VocabularyItem>,
     val total: Int,
 )
+
+enum class KanaScript { HIRAGANA, KATAKANA }
+
+enum class KanaGroup { BASIC, DAKUTEN, HANDAKUTEN, YOON }
+
+data class KanaItem(
+    val id: String,
+    val script: KanaScript,
+    val kana: String,
+    val romaji: String,
+    val group: KanaGroup,
+    val row: String,
+)
+
+data class LessonRow(
+    val ja: String,
+    val reading: String?,
+    val romaji: String?,
+    val meaning: String,
+)
+
+data class LessonSection(
+    val heading: String,
+    val body: String,
+    val rows: List<LessonRow>,
+)
+
+data class LessonSummary(
+    val id: String,
+    val title: String,
+    val summary: String,
+)
+
+data class Lesson(
+    val id: String,
+    val title: String,
+    val summary: String,
+    val sections: List<LessonSection>,
+)
+
+data class BookmarkedItems(
+    val vocabulary: List<VocabularyItem>,
+    val kanji: List<KanjiItem>,
+    val grammar: List<GrammarItem>,
+) {
+    val isEmpty: Boolean get() = vocabulary.isEmpty() && kanji.isEmpty() && grammar.isEmpty()
+}
 
 enum class ThemeMode { SYSTEM, LIGHT, DARK }
 

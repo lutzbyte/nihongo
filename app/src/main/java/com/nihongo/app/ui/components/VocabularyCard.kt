@@ -1,6 +1,7 @@
 package com.nihongo.app.ui.components
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -30,13 +31,9 @@ fun VocabularyCard(
     bookmarked: Boolean,
     onToggleBookmark: () -> Unit,
     modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null,
 ) {
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        shape = MaterialTheme.shapes.medium,
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = Elevation.card),
-    ) {
+    val content: @Composable ColumnScope.() -> Unit = {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -73,5 +70,24 @@ fun VocabularyCard(
                 )
             }
         }
+    }
+
+    if (onClick != null) {
+        Card(
+            onClick = onClick,
+            modifier = modifier.fillMaxWidth(),
+            shape = MaterialTheme.shapes.medium,
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            elevation = CardDefaults.cardElevation(defaultElevation = Elevation.card),
+            content = content,
+        )
+    } else {
+        Card(
+            modifier = modifier.fillMaxWidth(),
+            shape = MaterialTheme.shapes.medium,
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            elevation = CardDefaults.cardElevation(defaultElevation = Elevation.card),
+            content = content,
+        )
     }
 }

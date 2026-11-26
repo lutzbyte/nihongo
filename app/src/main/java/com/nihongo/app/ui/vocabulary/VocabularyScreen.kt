@@ -49,6 +49,7 @@ import com.nihongo.app.ui.theme.Spacing
 @Composable
 fun VocabularyScreen(
     onBack: () -> Unit,
+    onOpenDetail: (String) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: VocabularyViewModel = viewModel(factory = AppViewModelProvider.Factory),
 ) {
@@ -125,6 +126,7 @@ fun VocabularyScreen(
                             meaning = item.meaning,
                             bookmarked = "vocab:${item.id}" in state.bookmarks,
                             onToggleBookmark = { viewModel.toggleBookmark(item.id) },
+                            onClick = { onOpenDetail(item.id) },
                         )
                     }
                 }

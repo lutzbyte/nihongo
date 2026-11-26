@@ -13,13 +13,18 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.AutoStories
+import androidx.compose.material.icons.filled.Bookmarks
 import androidx.compose.material.icons.filled.ChatBubble
 import androidx.compose.material.icons.filled.Headphones
+import androidx.compose.material.icons.filled.School
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Spellcheck
 import androidx.compose.material.icons.filled.Translate
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -43,6 +48,7 @@ import com.nihongo.app.ui.components.DailyTargetCard
 import com.nihongo.app.ui.components.LearningCard
 import com.nihongo.app.ui.components.SampleDataNotice
 import com.nihongo.app.ui.illustration.MenekiNeko
+import com.nihongo.app.ui.theme.Elevation
 import com.nihongo.app.ui.theme.LocalNihongoExtraColors
 import com.nihongo.app.ui.theme.Spacing
 
@@ -58,6 +64,9 @@ private data class HomeTile(
 fun HomeScreen(
     onOpenVocabulary: () -> Unit,
     onOpenKanji: () -> Unit,
+    onOpenGrammar: () -> Unit,
+    onOpenFoundation: () -> Unit,
+    onOpenBookmarks: () -> Unit,
     onOpenFeature: (String) -> Unit,
     onOpenSettings: () -> Unit,
     modifier: Modifier = Modifier,
@@ -80,6 +89,12 @@ fun HomeScreen(
         AppTopBar(
             title = stringResource(R.string.app_name),
             actions = {
+                IconButton(onClick = onOpenBookmarks) {
+                    Icon(
+                        imageVector = Icons.Filled.Bookmarks,
+                        contentDescription = stringResource(R.string.action_bookmarks),
+                    )
+                }
                 IconButton(onClick = onOpenSettings) {
                     Icon(
                         imageVector = Icons.Filled.Settings,
@@ -125,6 +140,7 @@ fun HomeScreen(
                                 when (tile.key) {
                                     "vocabulary" -> onOpenVocabulary()
                                     "kanji" -> onOpenKanji()
+                                    "grammar" -> onOpenGrammar()
                                     else -> onOpenFeature(tile.key)
                                 }
                             },
@@ -133,6 +149,65 @@ fun HomeScreen(
                     }
                 }
             }
+
+            FoundationCard(
+                containerColor = extra.tileGreen,
+                tint = extra.success,
+                onClick = onOpenFoundation,
+            )
+
+            Box(modifier = Modifier.padding(bottom = Spacing.sm))
+        }
+    }
+}
+
+@Composable
+private fun FoundationCard(
+    containerColor: Color,
+    tint: Color,
+    onClick: () -> Unit,
+) {
+    Card(
+        onClick = onClick,
+        modifier = Modifier.fillMaxWidth(),
+        shape = MaterialTheme.shapes.large,
+        colors = CardDefaults.cardColors(containerColor = containerColor),
+        elevation = CardDefaults.cardElevation(defaultElevation = Elevation.none),
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(Spacing.lg),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Icon(
+                imageVector = Icons.Filled.School,
+                contentDescription = null,
+                tint = tint,
+                modifier = Modifier.size(40.dp),
+            )
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = Spacing.md),
+            ) {
+                Text(
+                    text = stringResource(R.string.foundation_title),
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface,
+                )
+                Text(
+                    text = stringResource(R.string.foundation_card_subtitle),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
         }
     }
 }

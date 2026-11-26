@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="foundation_title">Dasar Bahasa Jepang</string>
+    <string name="foundation_card_subtitle">Hiragana, Katakana, dan pelajaran dasar</string>
+    <string name="foundation_hiragana">Hiragana</string>
+    <string name="foundation_katakana">Katakana</string>
+    <string name="foundation_lessons">Pelajaran Dasar</string>
+    <string name="foundation_empty_title">Materi dasar belum tersedia</string>
+    <string name="foundation_empty_message">Materi muncul setelah dataset diimpor.</string>
+    <string name="kana_group_basic">Dasar</string>
+    <string name="kana_group_dakuten">Dakuten</string>
+    <string name="kana_group_handakuten">Handakuten</string>
+    <string name="kana_group_yoon">Yoon</string>
+    <string name="lesson_missing">Pelajaran tidak ditemukan</string>
+
+    <string name="grammar_search_hint">Cari pola tata bahasa</string>
+    <string name="grammar_empty_title">Belum ada tata bahasa</string>
+    <string name="grammar_empty_message">Materi untuk level ini belum tersedia. Materi muncul setelah dataset diimpor.</string>
+    <string name="grammar_missing">Pola tata bahasa tidak ditemukan</string>
+    <string name="grammar_formation">Rumus Pembentukan</string>
+    <string name="grammar_notes">Catatan</string>
+    <string name="grammar_examples">Contoh Kalimat</string>
+
+    <string name="vocab_detail_pos">Kelas Kata</string>
+    <string name="vocab_detail_examples">Contoh Kalimat</string>
+    <string name="vocab_detail_missing">Kosakata tidak ditemukan</string>
+    <string name="meaning_source_en">Arti dari sumber (bahasa Inggris). Terjemahan Indonesia belum tersedia.</string>
+    <string name="example_translation_en">Terjemahan contoh kalimat saat ini dalam bahasa Inggris.</string>
+
+    <string name="kanji_search_hint">Cari kanji, bacaan, atau arti</string>
+
+    <string name="action_bookmarks">Bookmark</string>
+    <string name="bookmark_title">Bookmark</string>
+    <string name="bookmark_empty_title">Belum ada bookmark</string>
+    <string name="bookmark_empty_message">Tandai kosakata, kanji, atau tata bahasa agar mudah ditemukan lagi.</string>
+</resources>

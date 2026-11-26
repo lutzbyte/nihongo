@@ -49,6 +49,7 @@ data class KanjiEntity(
 data class GrammarEntity(
     @PrimaryKey val id: String,
     val level: String,
+    val sortOrder: Int,
     val pattern: String,
     val reading: String?,
     val romaji: String?,
@@ -59,6 +60,30 @@ data class GrammarEntity(
     val notes: String?,
     val tags: String,
     val examplesJson: String,
+)
+
+@Entity(
+    tableName = "kana",
+    indices = [Index("script")],
+)
+data class KanaEntity(
+    @PrimaryKey val id: String,
+    val script: String,
+    val kana: String,
+    val romaji: String,
+    val kanaGroup: String,
+    val kanaRow: String,
+    val sortOrder: Int,
+)
+
+@Entity(tableName = "lesson")
+data class LessonEntity(
+    @PrimaryKey val id: String,
+    val category: String,
+    val sortOrder: Int,
+    val title: String,
+    val summary: String,
+    val sectionsJson: String,
 )
 
 @Entity(tableName = "dataset_state")
@@ -74,4 +99,6 @@ data class DatasetStateEntity(
     val vocabularyCount: Int,
     val kanjiCount: Int,
     val grammarCount: Int,
+    val kanaCount: Int,
+    val lessonCount: Int,
 )

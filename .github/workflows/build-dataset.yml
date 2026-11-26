@@ -44,6 +44,13 @@ jobs:
             --dataset-version "$DATASET_VERSION" \
             --source-commit "$SOURCE_COMMIT"
 
+      - name: Build foundation
+        run: |
+          python3 scripts/dataset/build_foundation.py \
+            --source dataset/foundation \
+            --out app/src/main/assets/curriculum \
+            --audit dataset/AUDIT.md
+
       - name: Upload audit and translation lists
         if: always()
         uses: actions/upload-artifact@v7

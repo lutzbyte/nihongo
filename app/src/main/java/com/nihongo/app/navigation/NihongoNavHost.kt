@@ -7,7 +7,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.nihongo.app.domain.model.JlptLevel
+import com.nihongo.app.domain.model.KanaScript
+import com.nihongo.app.ui.bookmark.BookmarkScreen
 import com.nihongo.app.ui.common.ComingSoonScreen
+import com.nihongo.app.ui.foundation.FoundationScreen
+import com.nihongo.app.ui.foundation.KanaScreen
+import com.nihongo.app.ui.foundation.LessonScreen
+import com.nihongo.app.ui.grammar.GrammarDetailScreen
+import com.nihongo.app.ui.grammar.GrammarListScreen
 import com.nihongo.app.ui.home.HomeScreen
 import com.nihongo.app.ui.kanji.KanjiDetailScreen
 import com.nihongo.app.ui.kanji.KanjiListScreen
@@ -16,6 +23,7 @@ import com.nihongo.app.ui.practice.QuizScreen
 import com.nihongo.app.ui.progress.ProgressScreen
 import com.nihongo.app.ui.settings.SettingsScreen
 import com.nihongo.app.ui.splash.SplashScreen
+import com.nihongo.app.ui.vocabulary.VocabularyDetailScreen
 import com.nihongo.app.ui.vocabulary.VocabularyScreen
 
 @Composable
@@ -42,6 +50,9 @@ fun NihongoNavHost(
             HomeScreen(
                 onOpenVocabulary = { navController.navigate(VocabularyRoute) },
                 onOpenKanji = { navController.navigate(KanjiListRoute) },
+                onOpenGrammar = { navController.navigate(GrammarListRoute) },
+                onOpenFoundation = { navController.navigate(FoundationRoute) },
+                onOpenBookmarks = { navController.navigate(BookmarkRoute) },
                 onOpenFeature = { feature ->
                     navController.navigate(ComingSoonRoute(feature, featurePhase(feature)))
                 },
@@ -69,7 +80,15 @@ fun NihongoNavHost(
         }
 
         composable<VocabularyRoute> {
-            VocabularyScreen(onBack = { navController.popBackStack() })
+            VocabularyScreen(
+                onBack = { navController.popBackStack() },
+                onOpenDetail = { id -> navController.navigate(VocabularyDetailRoute(id)) },
+            )
+        }
+
+        composable<VocabularyDetailRoute> { entry ->
+            val route = entry.toRoute<VocabularyDetailRoute>()
+            VocabularyDetailScreen(id = route.id, onBack = { navController.popBackStack() })
         }
 
         composable<KanjiListRoute> {
@@ -85,6 +104,46 @@ fun NihongoNavHost(
                 id = route.id,
                 onBack = { navController.popBackStack() },
                 onContinuePractice = { level -> navController.navigate(QuizRoute(level.name)) },
+            )
+        }
+
+        composable<GrammarListRoute> {
+            GrammarListScreen(
+                onBack = { navController.popBackStack() },
+                onOpenGrammar = { id -> navController.navigate(GrammarDetailRoute(id)) },
+            )
+        }
+
+        composable<GrammarDetailRoute> { entry ->
+            val route = entry.toRoute<GrammarDetailRoute>()
+            GrammarDetailScreen(id = route.id, onBack = { navController.popBackStack() })
+        }
+
+        composable<FoundationRoute> {
+            FoundationScreen(
+                onBack = { navController.popBackStack() },
+                onOpenKana = { script -> navController.navigate(KanaRoute(script)) },
+                onOpenLesson = { id -> navController.navigate(LessonRoute(id)) },
+            )
+        }
+
+        composable<KanaRoute> { entry ->
+            val route = entry.toRoute<KanaRoute>()
+            val script = KanaScript.entries.firstOrNull { it.name == route.script } ?: KanaScript.HIRAGANA
+            KanaScreen(script = script, onBack = { navController.popBackStack() })
+        }
+
+        composable<LessonRoute> { entry ->
+            val route = entry.toRoute<LessonRoute>()
+            LessonScreen(id = route.id, onBack = { navController.popBackStack() })
+        }
+
+        composable<BookmarkRoute> {
+            BookmarkScreen(
+                onBack = { navController.popBackStack() },
+                onOpenVocabulary = { id -> navController.navigate(VocabularyDetailRoute(id)) },
+                onOpenKanji = { id -> navController.navigate(KanjiDetailRoute(id)) },
+                onOpenGrammar = { id -> navController.navigate(GrammarDetailRoute(id)) },
             )
         }
 
