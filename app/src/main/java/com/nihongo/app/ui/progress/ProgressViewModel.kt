@@ -33,7 +33,11 @@ class ProgressViewModel(container: AppContainer) : ViewModel() {
 
     private data class Loaded(val days: Int, val content: UiState<ProgressSummary>)
 
-    private val loaded = combine(days, retryCounter) { d, _ -> d }
+    private val loaded = combine(
+        days,
+        retryCounter,
+        container.userDatabase.studyDao().observeSessionCount(),
+    ) { d, _, _ -> d }
         .flatMapLatest { d ->
             flow {
                 emit(Loaded(d, UiState.Loading))

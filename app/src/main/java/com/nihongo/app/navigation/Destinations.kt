@@ -60,8 +60,21 @@ data class LessonRoute(val id: String)
 @Serializable
 data object BookmarkRoute
 
+/** mode: "FLASHCARD", "QUIZ", atau "EXAM". */
 @Serializable
-data class QuizRoute(val level: String)
+data class PracticeSetupRoute(val mode: String)
+
+/** kind: "FLASHCARD" atau "REVIEW". scope: nama StudyScope. level: "N5".."N1" atau "ALL". */
+@Serializable
+data class FlashcardRoute(val kind: String, val scope: String, val level: String)
+
+/** section: nama PracticeSection. mode: "QUIZ" atau "EXAM". */
+@Serializable
+data class QuizRoute(
+    val level: String,
+    val section: String = "MIXED",
+    val mode: String = "QUIZ",
+)
 
 @Serializable
 data class ComingSoonRoute(val feature: String, val phase: Int)

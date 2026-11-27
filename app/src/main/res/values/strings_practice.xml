@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="practice_review_title">Review Hari Ini</string>
+    <string name="practice_review_due">%1$d kartu siap diulang</string>
+    <string name="practice_review_none">Belum ada kartu yang jatuh tempo.</string>
+    <string name="practice_review_start">Mulai Review</string>
+    <string name="practice_mode_flashcard">Flashcard</string>
+    <string name="practice_mode_flashcard_desc">Hafalkan dengan kartu. Jadwal ulang diatur otomatis.</string>
+    <string name="practice_mode_exam">Simulasi Ujian JLPT</string>
+    <string name="practice_mode_exam_desc">Latihan berwaktu dengan soal campuran. Bukan ujian resmi.</string>
+
+    <string name="setup_scope">Materi</string>
+    <string name="setup_section">Bagian soal</string>
+    <string name="section_moji_goi">Kosakata &amp; Kanji (文字・語彙)</string>
+    <string name="section_bunpo">Tata Bahasa (文法)</string>
+    <string name="section_mixed">Campuran</string>
+    <string name="setup_reading_listening_note">Bagian membaca dan mendengarkan tersedia pada Phase 7.</string>
+    <string name="setup_exam_info">Simulasi berisi soal Kosakata &amp; Kanji lalu soal Tata Bahasa, dengan batas waktu %1$d menit. Ini latihan, bukan ujian resmi JLPT.</string>
+    <string name="setup_flashcard_info">Sesi berisi kartu yang jatuh tempo, ditambah beberapa kartu baru.</string>
+
+    <string name="flash_title">Flashcard</string>
+    <string name="review_title">Review</string>
+    <string name="flash_show_answer">Tampilkan jawaban</string>
+    <string name="flash_tap_hint">Ketuk kartu untuk melihat jawaban</string>
+    <string name="flash_new">Baru</string>
+    <string name="grade_again">Lupa</string>
+    <string name="grade_hard">Sulit</string>
+    <string name="grade_good">Bagus</string>
+    <string name="grade_easy">Mudah</string>
+    <string name="interval_today">Hari ini</string>
+    <string name="interval_days">%1$d hari</string>
+    <string name="flash_empty_title">Tidak ada kartu</string>
+    <string name="flash_empty_review">Belum ada kartu yang perlu diulang. Pelajari materi dengan Flashcard dulu.</string>
+    <string name="flash_empty_deck">Tidak ada kartu untuk materi dan level ini.</string>
+    <string name="flash_done_title">Sesi selesai</string>
+    <string name="flash_done_reviewed">%1$d kartu diulang</string>
+    <string name="flash_done_again">%1$d kartu perlu diulang lagi</string>
+
+    <string name="quiz_prompt_vocab_meaning">Arti dari kata berikut adalah?</string>
+    <string name="quiz_prompt_vocab_from_meaning">Kata Jepang untuk arti berikut adalah?</string>
+    <string name="quiz_prompt_vocab_reading">Cara baca kata berikut adalah?</string>
+    <string name="quiz_prompt_kanji_meaning">Arti dari kanji berikut adalah?</string>
+    <string name="quiz_prompt_kanji_reading">Salah satu cara baca kanji berikut adalah?</string>
+    <string name="quiz_prompt_grammar_meaning">Arti dari pola berikut adalah?</string>
+    <string name="quiz_prompt_grammar_pattern">Pola tata bahasa untuk arti berikut adalah?</string>
+
+    <string name="exam_result_title">Simulasi selesai</string>
+    <string name="quiz_time_up">Waktu habis</string>
+    <string name="quiz_review_title">Pembahasan</string>
+    <string name="quiz_your_answer">Jawabanmu: %1$s</string>
+    <string name="quiz_correct_answer">Jawaban benar: %1$s</string>
+    <string name="quiz_not_answered">Tidak dijawab</string>
+    <string name="quiz_formation">Rumus: %1$s</string>
+    <string name="quiz_section_score">%1$s: %2$d dari %3$d</string>
+    <string name="quiz_exam_disclaimer">Simulasi latihan, bukan ujian resmi JLPT.</string>
+</resources>

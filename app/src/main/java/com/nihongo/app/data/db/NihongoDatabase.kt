@@ -21,12 +21,14 @@ abstract class NihongoDatabase : RoomDatabase() {
 
     abstract fun curriculumDao(): CurriculumDao
 
+    abstract fun practiceDao(): PracticeDao
+
     companion object {
         private const val DATABASE_NAME = "nihongo.db"
 
         /**
-         * SEMENTARA: database hanya berisi materi yang bisa diimpor ulang, jadi tabel dibuang
-         * saat skema naik. WAJIB diganti dengan Migration nyata sebelum ada tabel data pengguna.
+         * Database ini HANYA berisi materi yang bisa diimpor ulang, jadi tabel dibuang saat
+         * skema naik. Data belajar pengguna ada di UserDatabase dan tidak terpengaruh.
          */
         fun create(context: Context): NihongoDatabase =
             Room.databaseBuilder(

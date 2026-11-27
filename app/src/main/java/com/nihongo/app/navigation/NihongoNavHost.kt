@@ -8,6 +8,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.nihongo.app.domain.model.JlptLevel
 import com.nihongo.app.domain.model.KanaScript
+import com.nihongo.app.domain.model.PracticeSection
+import com.nihongo.app.domain.model.SessionKind
 import com.nihongo.app.ui.bookmark.BookmarkScreen
 import com.nihongo.app.ui.common.ComingSoonScreen
 import com.nihongo.app.ui.foundation.FoundationScreen
@@ -18,7 +20,9 @@ import com.nihongo.app.ui.grammar.GrammarListScreen
 import com.nihongo.app.ui.home.HomeScreen
 import com.nihongo.app.ui.kanji.KanjiDetailScreen
 import com.nihongo.app.ui.kanji.KanjiListScreen
+import com.nihongo.app.ui.practice.FlashcardScreen
 import com.nihongo.app.ui.practice.PracticeScreen
+import com.nihongo.app.ui.practice.PracticeSetupScreen
 import com.nihongo.app.ui.practice.QuizScreen
 import com.nihongo.app.ui.progress.ProgressScreen
 import com.nihongo.app.ui.settings.SettingsScreen
@@ -67,7 +71,32 @@ fun NihongoNavHost(
         composable<PracticeRoute> {
             PracticeScreen(
                 onBack = { navController.navigateToHomeTab() },
-                onStartQuiz = { level -> navController.navigate(QuizRoute(level.name)) },
+                onOpenSetup = { mode -> navController.navigate(PracticeSetupRoute(mode)) },
+                onStartReview = { navController.navigate(FlashcardRoute("REVIEW", "ALL", "ALL")) },
+            )
+        }
+
+        composable<PracticeSetupRoute> { entry ->
+            val route = entry.toRoute<PracticeSetupRoute>()
+            PracticeSetupScreen(
+                mode = route.mode,
+                onBack = { navController.popBackStack() },
+                onStartFlashcard = { scope, level ->
+                    navController.navigate(FlashcardRoute("FLASHCARD", scope.name, level.name))
+                },
+                onStartQuiz = { level, section, mode ->
+                    navController.navigate(QuizRoute(level.name, section.name, mode))
+                },
+            )
+        }
+
+        composable<FlashcardRoute> { entry ->
+            val route = entry.toRoute<FlashcardRoute>()
+            FlashcardScreen(
+                kind = route.kind,
+                scope = route.scope,
+                level = route.level,
+                onFinish = { navController.popBackStack() },
             )
         }
 
@@ -103,7 +132,9 @@ fun NihongoNavHost(
             KanjiDetailScreen(
                 id = route.id,
                 onBack = { navController.popBackStack() },
-                onContinuePractice = { level -> navController.navigate(QuizRoute(level.name)) },
+                onContinuePractice = { level ->
+                    navController.navigate(QuizRoute(level.name, PracticeSection.MOJI_GOI.name))
+                },
             )
         }
 
@@ -150,8 +181,12 @@ fun NihongoNavHost(
         composable<QuizRoute> { entry ->
             val route = entry.toRoute<QuizRoute>()
             val level = JlptLevel.entries.firstOrNull { it.name == route.level } ?: JlptLevel.N5
+            val section = PracticeSection.entries.firstOrNull { it.name == route.section } ?: PracticeSection.MIXED
+            val mode = if (route.mode == "EXAM") SessionKind.EXAM else SessionKind.QUIZ
             QuizScreen(
                 level = level,
+                section = section,
+                mode = mode,
                 onFinish = { navController.popBackStack() },
             )
         }

@@ -6,6 +6,7 @@ import com.nihongo.app.di.AppContainer
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
@@ -19,8 +20,11 @@ class HomeViewModel(container: AppContainer) : ViewModel() {
 
     private val repository = container.learningRepository
 
-    val uiState: StateFlow<HomeUiState> = container.preferencesRepository.preferences
-        .map { prefs ->
+    val uiState: StateFlow<HomeUiState> = combine(
+        container.preferencesRepository.preferences,
+        container.userDatabase.studyDao().observeSessionCount(),
+    ) { prefs, _ -> prefs.dailyGoalMinutes }
+        .map { goal ->
             val today = try {
                 repository.getProgress(7).todayMinutes
             } catch (e: CancellationException) {
@@ -30,7 +34,7 @@ class HomeViewModel(container: AppContainer) : ViewModel() {
             }
             HomeUiState(
                 todayMinutes = today,
-                goalMinutes = prefs.dailyGoalMinutes,
+                goalMinutes = goal,
                 showSampleNotice = repository.isSample,
             )
         }
